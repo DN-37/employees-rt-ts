@@ -11,19 +11,28 @@ datasource db {
 }
 
 model User {
-  id              String     @id @default(uuid())
-  email           String
-  password        String
-  name            String
-  createdEmployee  Employee[]
+  id                String     @id @default(uuid())
+  email             String
+  password          String
+  name              String
+  createdEmployee   Employee[]
 }
 
 model Employee {
-  id        String @id @default(uuid())
-  firstName String
-  lastName  String
-  age       String
-  address   String
-  user      User   @relation(fields: [userId], references: [id])
-  userId    String
+  id            String @id @default(uuid())
+  firstName     String
+  lastName      String
+  age           String
+  address       String
+  user          User   @relation(fields: [userId], references: [id])
+  userId        String
+  createdSkill  Skill[]
+}
+
+model Skill {
+  id            String @id @default(uuid())
+  name          String
+  experience    String
+  employee      Employee   @relation(fields: [employeeId], references: [id])
+  employeeId    String
 }
