@@ -19,17 +19,20 @@ const all = async (req, res) => {
 const add = async (req, res) => {
     const data = req.body;
   
-    if (!data.name || !data.experience) {
+    if (!data.name || !data.experience || !data.employeeId) {
       return res.status(400).json({ data: "Все поля обязятельные" });
     }
   
     const skill = await prisma.employee.update({
       where: {
-        id: '557b95b1-4d71-4e95-afd8-ec13a435195c',
+        id: data.employeeId,
       },
       data: {
         createdSkill: {
-          create: data,
+          create: {
+            name: data.name,
+            experience: data.experience
+          },
         },
       },
     });
