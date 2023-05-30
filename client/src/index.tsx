@@ -5,6 +5,8 @@ import { store } from './app/store';
 import { Paths } from "./paths";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import './index.css';
+import { Login } from './pages/login';
+import { Register } from './pages/register';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -16,11 +18,11 @@ const router = createBrowserRouter([
   },
   {
     path: Paths.login,
-    element: <h1>Login</h1>,
+    element: <Login />
   },
   {
     path: Paths.register,
-    element: <h1>Register</h1>,
+    element: <Register />
   },
 ]);
 
