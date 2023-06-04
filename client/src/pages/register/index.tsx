@@ -1,7 +1,10 @@
+import { Layout } from "../../components/layout";
 import React from 'react';
 
 export const Register = () => {
     return (
-        <div>Register</div>
+        <Layout>
+            <div>Register</div>
+        </Layout>
     )
 }

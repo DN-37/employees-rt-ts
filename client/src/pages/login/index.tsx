@@ -1,4 +1,4 @@
-import Layout from 'antd/es/layout/layout';
+import { Layout } from "../../components/layout";
 import React from 'react';
 
 export const Login = () => {
