@@ -8,6 +8,7 @@ import './index.css';
 import { Login } from './pages/login';
 import { Register } from './pages/register';
 import { ConfigProvider, theme } from "antd";
+import { Auth } from './features/auth/auth';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -35,7 +36,9 @@ root.render(
           algorithm: theme.darkAlgorithm,
         }}
       >
-        <RouterProvider router={router} />
+        <Auth>
+          <RouterProvider router={router} />
+        </Auth>
       </ConfigProvider>
     </Provider>
   </React.StrictMode>
