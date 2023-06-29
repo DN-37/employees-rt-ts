@@ -10,6 +10,7 @@ import { Register } from './pages/register';
 import { ConfigProvider, theme } from "antd";
 import { Auth } from './features/auth/auth';
 import { AddEmployee } from "./pages/add-employee";
+import { Status } from "./pages/status";
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: Paths.employeeAdd,
     element: <AddEmployee />,
+  },
+  {
+    path: `${Paths.status}/:status`,
+    element: <Status />,
   },
 ]);
 
