@@ -11,6 +11,7 @@ import { ConfigProvider, theme } from "antd";
 import { Auth } from './features/auth/auth';
 import { AddEmployee } from "./pages/add-employee";
 import { Status } from "./pages/status";
+import { Employee } from "./pages/employee";
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
   {
     path: `${Paths.status}/:status`,
     element: <Status />,
+  },
+  {
+    path: `${Paths.employee}/:id`,
+    element: <Employee />,
   },
 ]);
 
