@@ -8,7 +8,7 @@ const baseQuery = fetchBaseQuery({
             (getState() as RootState).auth.user?.token ||
             localStorage.getItem("token");
 
-        if (token && token !== null) {
+        if (token) {
             headers.set("authorization", `Bearer ${token}`);
         }
         return headers;
