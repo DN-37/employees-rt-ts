@@ -1,24 +1,33 @@
-import { Layout } from "../../components/layout";
-import React from 'react';
-import { useState } from "react";
 import { Card, Form, Row, Space, Typography } from "antd";
-import { CustomInput } from "../../components/custom-input";
-import { PasswordInput } from "../../components/password-input";
-import { CustomButton } from "../../components/custom-button";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { Paths } from "../../paths";
-import { UserData, useLoginMutation } from "../../app/services/auth";
-import { isErrorWithMessage } from "../../utils/is-error-with-message";
+import { useLoginMutation, UserData } from "../../app/services/auth";
+import { CustomButton } from "../../components/custom-button";
+import { CustomInput } from "../../components/custom-input";
 import { ErrorMessage } from "../../components/error-message";
+import { Layout } from "../../components/layout";
+import { PasswordInput } from "../../components/password-input";
+import { selectUser } from "../../features/auth/authSlice";
+import { Paths } from "../../paths";
+import { isErrorWithMessage } from "../../utils/is-error-with-message";
 
 export const Login = () => {
     const navigate = useNavigate();
     const [error, setError] = useState("");
+    const user = useSelector(selectUser);
     const [loginUser, loginUserResult] = useLoginMutation();
+
+    useEffect(() => {
+        if (user) {
+            navigate("/");
+        }
+    }, [user, navigate]);
 
     const login = async (data: UserData) => {
         try {
             await loginUser(data).unwrap();
+
             navigate("/");
         } catch (err) {
             const maybeError = isErrorWithMessage(err);
@@ -38,7 +47,11 @@ export const Login = () => {
                     <Form onFinish={login}>
                         <CustomInput type="email" name="email" placeholder="Email" />
                         <PasswordInput name="password" placeholder="Пароль" />
-                        <CustomButton type="primary" htmlType="submit">
+                        <CustomButton
+                            type="primary"
+                            htmlType="submit"
+                            loading={loginUserResult.isLoading}
+                        >
                             Войти
                         </CustomButton>
                     </Form>
@@ -51,5 +64,5 @@ export const Login = () => {
                 </Card>
             </Row>
         </Layout>
-    )
-}
+    );
+};

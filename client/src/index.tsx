@@ -1,32 +1,53 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
-import { store } from './app/store';
-import { Paths } from "./paths";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import './index.css';
-import { Login } from './pages/login';
-import { Register } from './pages/register';
+import React from "react";
+import { createRoot } from "react-dom/client";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
 import { ConfigProvider, theme } from "antd";
-import { Auth } from './features/auth/auth';
-
-const container = document.getElementById('root')!;
-const root = createRoot(container);
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { AddEmployee } from "./pages/add-employee";
+import { Register } from "./pages/register";
+import { Login } from "./pages/login";
+import { Employee } from "./pages/employee";
+import { Status } from "./pages/status";
+import { EditEmployee } from "./pages/edit-employee";
+import { Auth } from "./features/auth/auth";
+import { Paths } from "./paths";
+import "./index.css";
+import { Employees } from "./pages/employess";
 
 const router = createBrowserRouter([
   {
     path: Paths.home,
-    element: <h1>Employees</h1>,
+    element: <Employees />,
   },
   {
     path: Paths.login,
-    element: <Login />
+    element: <Login />,
   },
   {
     path: Paths.register,
-    element: <Register />
+    element: <Register />,
+  },
+  {
+    path: Paths.employeeAdd,
+    element: <AddEmployee />,
+  },
+  {
+    path: `${Paths.employee}/:id`,
+    element: <Employee />,
+  },
+  {
+    path: `${Paths.employeeEdit}/:id`,
+    element: <EditEmployee />,
+  },
+  {
+    path: `${Paths.status}/:status`,
+    element: <Status />,
   },
 ]);
+
+const container = document.getElementById("root")!;
+const root = createRoot(container);
 
 root.render(
   <React.StrictMode>
